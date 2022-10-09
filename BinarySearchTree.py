@@ -65,6 +65,20 @@ class BSTNode:
         
     def __str__(self):
         return 'BSTNOde <{}>'.format(self.to_tuple())
+    
+def create_balanced_bst(arr,l=0,h=None,parent=None):
+    if h is None:
+        h=len(arr)-1
+    if l>h:
+        return None
+    mid=(l+h)//2
+    root=BSTNode(arr[mid])
+    root.parent=parent
+    root.left=create_balanced_bst(arr,l,mid-1,root)
+    root.right=create_balanced_bst(arr,mid+1,h,root)
+    return root
+def bst_to_balanced(node):
+    return create_balanced_bst(node.list_all())
       
 bst=BSTNode(10)
 bst.insert(5)
